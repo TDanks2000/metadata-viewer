@@ -1,17 +1,6 @@
 import { useState } from "react";
+import type { MetadataResult } from "@/@types";
 import { api } from "@/trpc/react";
-
-type MetadataResult = {
-	title?: string;
-	description?: string;
-	image?: string;
-	url?: string;
-	siteName?: string;
-	type?: string;
-	author?: string;
-	keywords?: string[];
-	other: Record<string, string>;
-};
 
 export function useMetadataFetcher() {
 	const [url, setUrl] = useState("");
