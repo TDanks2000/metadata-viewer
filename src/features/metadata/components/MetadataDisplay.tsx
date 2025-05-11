@@ -18,7 +18,6 @@ import {
 	CardTitle,
 } from "@/components/ui/card";
 import { CopyButton } from "@/components/ui/copy-button";
-import { Separator } from "@/components/ui/separator";
 import { cn } from "@/lib/utils";
 
 type MetadataResult = {
@@ -142,7 +141,7 @@ export function MetadataDisplay({ metadata }: { metadata: MetadataResult }) {
 							</CardHeader>
 							<CardContent>
 								<div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-									{Object.entries(metadata.other).map(([key, value], index) => (
+									{Object.entries(metadata.other).map(([key, value]) => (
 										<div
 											key={key}
 											className="space-y-1 rounded-md border border-border bg-muted p-3"
@@ -157,9 +156,6 @@ export function MetadataDisplay({ metadata }: { metadata: MetadataResult }) {
 												/>
 											</div>
 											<p className="break-all text-sm">{value}</p>
-											{index < Object.entries(metadata.other).length - 1 && (
-												<Separator className="mt-2 sm:hidden" />
-											)}
 										</div>
 									))}
 								</div>
