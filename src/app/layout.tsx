@@ -3,6 +3,8 @@ import "@/styles/globals.css";
 import type { Metadata } from "next";
 import { Geist } from "next/font/google";
 import { ThemeProvider } from "@/components/theme-provider";
+import { Toaster } from "@/components/ui/sonner";
+import { TooltipProvider } from "@/components/ui/tooltip";
 import { TRPCReactProvider } from "@/trpc/react";
 
 export const metadata: Metadata = {
@@ -28,7 +30,10 @@ export default function RootLayout({
 					enableSystem
 					disableTransitionOnChange
 				>
-					<TRPCReactProvider>{children}</TRPCReactProvider>
+					<Toaster />
+					<TRPCReactProvider>
+						<TooltipProvider>{children}</TooltipProvider>
+					</TRPCReactProvider>
 				</ThemeProvider>
 			</body>
 		</html>

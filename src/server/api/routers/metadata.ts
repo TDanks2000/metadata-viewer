@@ -29,8 +29,7 @@ export const metadataRouter = createTRPCRouter({
 		}),
 });
 
-// We need to install jsdom for server-side HTML parsing
-import { JSDOM } from "jsdom";
+import { parse } from "node-html-parser";
 
 async function extractMetadata(html: string, url: string) {
 	const result = {
@@ -46,15 +45,14 @@ async function extractMetadata(html: string, url: string) {
 	};
 
 	try {
-		// Create a virtual DOM using jsdom
-		const dom = new JSDOM(html);
-		const doc = dom.window.document;
+		// Parse HTML with node-html-parser
+		const root = parse(html);
 
 		// Helper function to get meta content
 		const getMetaContent = (name: string, property: string) => {
 			return (
-				doc.querySelector(`meta[name="${name}"]`)?.getAttribute("content") ||
-				doc
+				root.querySelector(`meta[name="${name}"]`)?.getAttribute("content") ||
+				root
 					.querySelector(`meta[property="${property}"]`)
 					?.getAttribute("content") ||
 				""
@@ -62,7 +60,7 @@ async function extractMetadata(html: string, url: string) {
 		};
 
 		// Extract basic metadata
-		result.title = doc.querySelector("title")?.textContent || "";
+		result.title = root.querySelector("title")?.text || "";
 		result.description = getMetaContent("description", "og:description");
 		result.image = getMetaContent("image", "og:image");
 		result.siteName = getMetaContent("application-name", "og:site_name");
@@ -79,7 +77,7 @@ async function extractMetadata(html: string, url: string) {
 		}
 
 		// Extract all meta tags for 'other' category
-		const metaTags = doc.querySelectorAll("meta");
+		const metaTags = root.querySelectorAll("meta");
 		metaTags.forEach((tag) => {
 			const name = tag.getAttribute("name") || tag.getAttribute("property");
 			const content = tag.getAttribute("content");
