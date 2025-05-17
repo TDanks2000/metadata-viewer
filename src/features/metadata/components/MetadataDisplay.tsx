@@ -24,7 +24,6 @@ import {
 } from "@/components/ui/card";
 import { CopyButton } from "@/components/ui/copy-button";
 import { cn } from "@/lib/utils";
-import { MetadataScore } from "./MetadataScore";
 
 export function MetadataDisplay({ metadata }: { metadata: MetadataResult }) {
 	const [imageError, setImageError] = useState(false);
@@ -268,8 +267,6 @@ export function MetadataDisplay({ metadata }: { metadata: MetadataResult }) {
 						)}
 					</CardContent>
 				</Card>
-
-				<MetadataScore metadata={metadata} />
 			</div>
 		</div>
 	);

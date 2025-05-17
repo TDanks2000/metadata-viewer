@@ -1,5 +1,6 @@
 import { createCallerFactory, createTRPCRouter } from "@/server/api/trpc";
 import { metadataRouter } from "./routers/metadata";
+import { sitemapRouter } from "./routers/sitemap";
 
 /**
  * This is the primary router for your server.
@@ -8,6 +9,7 @@ import { metadataRouter } from "./routers/metadata";
  */
 export const appRouter = createTRPCRouter({
 	metadata: metadataRouter,
+  sitemap: sitemapRouter
 });
 
 // export type definition of API
