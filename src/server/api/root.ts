@@ -1,4 +1,5 @@
 import { createCallerFactory, createTRPCRouter } from "@/server/api/trpc";
+import { adsenseRouter } from "./routers/adsense";
 import { metadataRouter } from "./routers/metadata";
 import { sitemapRouter } from "./routers/sitemap";
 
@@ -9,7 +10,8 @@ import { sitemapRouter } from "./routers/sitemap";
  */
 export const appRouter = createTRPCRouter({
 	metadata: metadataRouter,
-  sitemap: sitemapRouter
+	sitemap: sitemapRouter,
+	adsense: adsenseRouter,
 });
 
 // export type definition of API
